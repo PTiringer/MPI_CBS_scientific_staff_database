@@ -1,3 +1,29 @@
 data:
-  m_def: mpi_cbs_scientific_staff_database.schema_packages.schema_package.NewSchemaPackage
-  name: Markus
+  m_def: mpi_cbs_scientific_staff_database.schema_packages.schema_package.ScientificStaffProfile
+  display_name: Ada Lovelace
+  email: ada.lovelace@example.org
+  position_role: Research Scientist
+  department_or_independent_group: Independent Group for Computational Neuroscience
+  subgroup_lab_team: Methods Lab
+  main_expertise_type: Data Analysis
+  expertise_summary: |
+    <p>Builds reproducible analysis workflows for multimodal neuroimaging.</p>
+  research_domains:
+    - Cognitive neuroscience
+    - Neuroinformatics
+  methods_modalities:
+    - fMRI
+    - EEG
+  skills_keywords:
+    - Python
+    - Reproducibility
+  tools_software:
+    - MNE-Python
+    - Nilearn
+  subject_populations:
+    - Adults
+  socials:
+    - https://example.org/ada
+  equipment:
+    - EEG system
+  last_updated: '2026-06-10T00:00:00+00:00'

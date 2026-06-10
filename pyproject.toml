@@ -12,8 +12,8 @@ classifiers = [
     "Programming Language :: Python :: 3.12",
     
 ]
-name = "MPI_CBS_scientific_staff_database"
-description = "A database for keeping up with the skills of the scientific staff at the institut"
+name = "mpi-cbs-scientific-staff-database"
+description = "MPI CBS scientific staff expertise database plugin for NOMAD"
 version = "0.1.0"
 readme = "README.md"
 requires-python = ">=3.10"
@@ -26,7 +26,6 @@ maintainers = [
 license = { file = "LICENSE" }
 dependencies = [
     "nomad-lab>=1.4.1",
-    "fastapi"
 ]
 
 [project.urls]
@@ -129,13 +128,8 @@ package-dir = { "" = "src" }
 where = ["src"]
 
 [project.entry-points.'nomad.plugin']
-parser_entry_point = "mpi_cbs_scientific_staff_database.parsers:parser_entry_point"
 schema_package_entry_point = "mpi_cbs_scientific_staff_database.schema_packages:schema_package_entry_point"
-normalizer_entry_point = "mpi_cbs_scientific_staff_database.normalizers:normalizer_entry_point"
 app_entry_point = "mpi_cbs_scientific_staff_database.apps:app_entry_point"
-
-
-api_entry_point = "mpi_cbs_scientific_staff_database.apis:api_entry_point"
 
 [tool.cruft]
 # Avoid updating workflow files, this leads to permissions issues
