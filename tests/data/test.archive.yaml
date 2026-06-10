@@ -5,9 +5,8 @@ data:
   position_role: Research Scientist
   department_or_independent_group: Independent Group for Computational Neuroscience
   subgroup_lab_team: Methods Lab
-  main_expertise_type: Data Analysis
-  expertise_summary: |
-    <p>Builds reproducible analysis workflows for multimodal neuroimaging.</p>
+  main_expertise_type: Theoretical/Computational
+  expertise_summary: Builds reproducible analysis workflows for multimodal neuroimaging.
   research_domains:
     - Cognitive neuroscience
     - Neuroinformatics
@@ -21,9 +20,8 @@ data:
     - MNE-Python
     - Nilearn
   subject_populations:
-    - Adults
-  socials:
-    - https://example.org/ada
+    - adults
+  socials: https://example.org/ada
   equipment:
     - EEG system
   last_updated: '2026-06-10T00:00:00+00:00'

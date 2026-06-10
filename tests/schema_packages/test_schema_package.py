@@ -11,7 +11,7 @@ def test_schema_package():
     assert entry_archive.data.display_name == 'Ada Lovelace'
     assert entry_archive.data.email == 'ada.lovelace@example.org'
     assert entry_archive.data.position_role == 'Research Scientist'
-    assert entry_archive.data.main_expertise_type == 'Data Analysis'
+    assert entry_archive.data.main_expertise_type == 'Theoretical/Computational'
     assert 'Cognitive neuroscience' in entry_archive.data.research_domains
     assert 'MNE-Python' in entry_archive.data.tools_software
     assert entry_archive.metadata.entry_name == 'Ada Lovelace'
