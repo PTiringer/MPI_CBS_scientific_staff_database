@@ -1,0 +1,34 @@
+{
+  "template": "https://github.com/FAIRmat-NFDI/cookiecutter-nomad-plugin",
+  "commit": "970fdbb387269545102f25e6a16f7a7b422c9414",
+  "checkout": null,
+  "context": {
+    "cookiecutter": {
+      "full_name": "Peter Tiringer",
+      "email": "tiringer@cbs.mpg.de",
+      "github_username": "PTiringer",
+      "plugin_name": "MPI_CBS_scientific_staff_database",
+      "module_name": "mpi_cbs_scientific_staff_database",
+      "short_description": "A database for keeping up with the skills of the scientific staff at the institut",
+      "version": "0.1.0",
+      "license": "Apache-2.0",
+      "include_schema_package": true,
+      "include_normalizer": true,
+      "include_parser": true,
+      "include_app": true,
+      "include_example_uploads": false,
+      "include_action": false,
+      "include_api": true,
+      "include_north_tools": false,
+      "north_tool_name": "my_north_tool",
+      "include_citation_file": false,
+      "_copy_without_render": [
+        "*.html",
+        "*.png"
+      ],
+      "_template": "https://github.com/FAIRmat-NFDI/cookiecutter-nomad-plugin",
+      "_commit": "970fdbb387269545102f25e6a16f7a7b422c9414"
+    }
+  },
+  "directory": null
+}
