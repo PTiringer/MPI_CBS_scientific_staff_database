@@ -100,18 +100,6 @@ app_entry_point = AppEntryPoint(
                             search_quantity=f'data.expertise_summary#{schema}',
                             options=0,
                         ),
-                        MenuItemTerms(
-                            search_quantity=f'data.research_domains#{schema}',
-                            options=10,
-                        ),
-                        MenuItemTerms(
-                            search_quantity=f'data.methods_modalities#{schema}',
-                            options=10,
-                        ),
-                        MenuItemTerms(
-                            search_quantity=f'data.skills_keywords#{schema}',
-                            options=10,
-                        ),
                     ],
                 ),
                 Menu(
@@ -119,20 +107,8 @@ app_entry_point = AppEntryPoint(
                     size='lg',
                     items=[
                         MenuItemTerms(
-                            search_quantity=f'data.tools_software#{schema}',
-                            options=10,
-                        ),
-                        MenuItemTerms(
-                            search_quantity=f'data.subject_populations#{schema}',
-                            options=10,
-                        ),
-                        MenuItemTerms(
                             search_quantity=f'data.socials#{schema}',
                             options=0,
-                        ),
-                        MenuItemTerms(
-                            search_quantity=f'data.equipment#{schema}',
-                            options=10,
                         ),
                         MenuItemHistogram(
                             title='Last Updated',

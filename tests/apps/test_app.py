@@ -17,7 +17,7 @@ def test_staff_app_searches_schema_quantities():
 def test_last_updated_filter_uses_datetime_widget():
     from mpi_cbs_scientific_staff_database.apps import app_entry_point, schema
 
-    last_updated_filter = app_entry_point.app.menu.items[2].items[4]
+    last_updated_filter = app_entry_point.app.menu.items[2].items[1]
 
     assert last_updated_filter.type == 'histogram'
     assert last_updated_filter.title == 'Last Updated'
