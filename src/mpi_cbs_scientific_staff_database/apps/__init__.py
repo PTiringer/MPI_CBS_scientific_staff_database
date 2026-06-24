@@ -65,11 +65,13 @@ app_entry_point = AppEntryPoint(
                     title='Staff',
                     items=[
                         MenuItemTerms(
-                            search_quantity=f'data.display_name#{schema}',
+                            title='Display Name',
+                            search_quantity=f'data.display_name_search#{schema}',
                             options=0,
                         ),
                         MenuItemTerms(
-                            search_quantity=f'data.email#{schema}',
+                            title='Email',
+                            search_quantity=f'data.email_search#{schema}',
                             options=0,
                         ),
                         MenuItemTerms(
@@ -97,7 +99,8 @@ app_entry_point = AppEntryPoint(
                             options=10,
                         ),
                         MenuItemTerms(
-                            search_quantity=f'data.expertise_summary#{schema}',
+                            title='Expertise Summary',
+                            search_quantity=f'data.expertise_search#{schema}',
                             options=0,
                         ),
                     ],
@@ -107,7 +110,8 @@ app_entry_point = AppEntryPoint(
                     size='lg',
                     items=[
                         MenuItemTerms(
-                            search_quantity=f'data.socials#{schema}',
+                            title='Socials / Resources',
+                            search_quantity=f'data.resources_search#{schema}',
                             options=0,
                         ),
                         MenuItemHistogram(

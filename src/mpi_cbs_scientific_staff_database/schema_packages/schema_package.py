@@ -1,3 +1,4 @@
+import re
 from typing import TYPE_CHECKING
 
 from nomad.datamodel.data import BasicElnCategory, EntryData
@@ -75,13 +76,48 @@ REQUIRED_FIELDS = {
 }
 
 
+def search_tokens(*values: str | None) -> list[str]:
+    tokens: set[str] = set()
+
+    for raw_value in values:
+        if not raw_value:
+            continue
+
+        value = raw_value.strip()
+        if not value:
+            continue
+
+        candidates = [value, value.lower()]
+        candidates.extend(re.split(r'[\s,;:/@._-]+', value))
+
+        for raw_candidate in candidates:
+            candidate = raw_candidate.strip()
+            if not candidate:
+                continue
+
+            variants = {candidate, candidate.lower()}
+            for variant in variants:
+                tokens.add(variant)
+                for index in range(2, len(variant) + 1):
+                    tokens.add(variant[:index])
+
+    return sorted(tokens)
+
+
 class ScientificStaffProfile(ElnBaseSection, EntryData):
     m_def = Section(
         categories=[BasicElnCategory],
         label='Scientific Staff Profile',
         a_eln=dict(
             lane_width='1200px',
-            hide=['lab_id', 'datetime'],
+            hide=[
+                'lab_id',
+                'datetime',
+                'display_name_search',
+                'email_search',
+                'expertise_search',
+                'resources_search',
+            ],
             properties=dict(
                 order=[
                     'display_name',
@@ -114,6 +150,26 @@ class ScientificStaffProfile(ElnBaseSection, EntryData):
         type=str,
         description='Required. Primary contact email.',
         a_eln=dict(component='StringEditQuantity'),
+    )
+    display_name_search = Quantity(
+        type=str,
+        shape=['*'],
+        description='Hidden helper tokens for partial display name search.',
+    )
+    email_search = Quantity(
+        type=str,
+        shape=['*'],
+        description='Hidden helper tokens for partial email search.',
+    )
+    expertise_search = Quantity(
+        type=str,
+        shape=['*'],
+        description='Hidden helper tokens for partial expertise/resource search.',
+    )
+    resources_search = Quantity(
+        type=str,
+        shape=['*'],
+        description='Hidden helper tokens for partial tools, socials, and equipment search.',
     )
     position_role = Quantity(
         type=MEnum(POSITIONS_ROLES),
@@ -217,13 +273,27 @@ class ScientificStaffProfile(ElnBaseSection, EntryData):
     def normalize(self, archive: 'EntryArchive', logger: 'BoundLogger') -> None:
         super().normalize(archive, logger)
 
+        self.display_name_search = search_tokens(self.display_name)
+        self.email_search = search_tokens(self.email)
+        self.expertise_search = search_tokens(
+            self.expertise_summary,
+            *(self.research_domains or []),
+            *(self.methods_modalities or []),
+            *(self.skills_keywords or []),
+        )
+        self.resources_search = search_tokens(
+            *(self.tools_software or []),
+            self.socials,
+            *(self.equipment or []),
+        )
+
         if archive.metadata and self.display_name:
             archive.metadata.entry_name = self.display_name
 
         missing = []
         for field, label in REQUIRED_FIELDS.items():
             value = getattr(self, field)
-            if value is None or value == '' or value == []:
+            if value in (None, '', []):
                 missing.append(label)
 
         if missing:
