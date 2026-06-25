@@ -75,8 +75,8 @@ app_entry_point = AppEntryPoint(
         dashboard=Dashboard(
             widgets=[
                 WidgetTerms(
-                    title='Display Name / Email',
-                    search_quantity='results.eln.names',
+                    title='Display Name',
+                    search_quantity=f'data.display_name#{schema}',
                     layout=widget_layout(0, 0),
                     show_input=True,
                 ),

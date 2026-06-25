@@ -31,13 +31,13 @@ def test_staff_app_has_default_dashboard_widgets():
     widgets = app_entry_point.app.dashboard.widgets
 
     assert [widget.title for widget in widgets] == [
-        'Display Name / Email',
+        'Display Name',
         'Position / Role',
         'Department / Independent Group',
         'Main Expertise Type',
     ]
     assert [widget.search_quantity for widget in widgets] == [
-        'results.eln.names',
+        f'data.display_name#{schema}',
         f'data.position_role#{schema}',
         f'data.department_or_independent_group#{schema}',
         f'data.main_expertise_type#{schema}',
