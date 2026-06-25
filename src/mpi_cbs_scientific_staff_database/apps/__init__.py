@@ -24,9 +24,9 @@ schema = (
 
 
 def widget_layout(x: int, y: int) -> dict[str, Layout]:
-    layout = Layout(h=8, w=6, x=x, y=y)
+    layout = Layout(h=3, w=3, x=x, y=y, minH=3, minW=3)
     return {
-        'sm': Layout(h=8, w=12, x=0, y=y),
+        'sm': Layout(h=3, w=12, x=0, y=y, minH=3, minW=3),
         'md': layout,
         'lg': layout,
         'xl': layout,
@@ -83,7 +83,7 @@ app_entry_point = AppEntryPoint(
                 WidgetTerms(
                     title='Position / Role',
                     search_quantity=f'data.position_role#{schema}',
-                    layout=widget_layout(6, 0),
+                    layout=widget_layout(3, 0),
                     show_input=True,
                 ),
                 WidgetTerms(
@@ -91,13 +91,13 @@ app_entry_point = AppEntryPoint(
                     search_quantity=(
                         f'data.department_or_independent_group#{schema}'
                     ),
-                    layout=widget_layout(0, 8),
+                    layout=widget_layout(6, 0),
                     show_input=True,
                 ),
                 WidgetTerms(
                     title='Main Expertise Type',
                     search_quantity=f'data.main_expertise_type#{schema}',
-                    layout=widget_layout(6, 8),
+                    layout=widget_layout(9, 0),
                     show_input=True,
                 ),
             ],
