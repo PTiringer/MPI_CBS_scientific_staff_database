@@ -111,7 +111,6 @@ app_entry_point = AppEntryPoint(
                         MenuItemHistogram(
                             title='Last Updated',
                             x=Axis(search_quantity=f'data.last_updated#{schema}'),
-                            show_statistics=False,
                         ),
                     ],
                 ),
