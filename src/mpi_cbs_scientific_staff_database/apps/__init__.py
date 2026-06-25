@@ -4,7 +4,9 @@ from nomad.config.models.ui import (
     Axis,
     Column,
     Columns,
+    Dashboard,
     Filters,
+    Layout,
     Menu,
     MenuItemCustomQuantities,
     MenuItemDefinitions,
@@ -12,12 +14,25 @@ from nomad.config.models.ui import (
     MenuItemTerms,
     MenuItemVisibility,
     SearchQuantities,
+    WidgetTerms,
 )
 
 schema = (
     'mpi_cbs_scientific_staff_database.schema_packages.schema_package.'
     'ScientificStaffProfile'
 )
+
+
+def widget_layout(x: int, y: int) -> dict[str, Layout]:
+    layout = Layout(h=8, w=6, x=x, y=y)
+    return {
+        'sm': Layout(h=8, w=12, x=0, y=y),
+        'md': layout,
+        'lg': layout,
+        'xl': layout,
+        'xxl': layout,
+    }
+
 
 app_entry_point = AppEntryPoint(
     name='Scientific Staff Database',
@@ -56,6 +71,36 @@ app_entry_point = AppEntryPoint(
                 ),
                 f'data.last_updated#{schema}': Column(label='Last Updated'),
             },
+        ),
+        dashboard=Dashboard(
+            widgets=[
+                WidgetTerms(
+                    title='Display Name / Email',
+                    search_quantity='results.eln.names',
+                    layout=widget_layout(0, 0),
+                    show_input=True,
+                ),
+                WidgetTerms(
+                    title='Position / Role',
+                    search_quantity=f'data.position_role#{schema}',
+                    layout=widget_layout(6, 0),
+                    show_input=True,
+                ),
+                WidgetTerms(
+                    title='Department / Independent Group',
+                    search_quantity=(
+                        f'data.department_or_independent_group#{schema}'
+                    ),
+                    layout=widget_layout(0, 8),
+                    show_input=True,
+                ),
+                WidgetTerms(
+                    title='Main Expertise Type',
+                    search_quantity=f'data.main_expertise_type#{schema}',
+                    layout=widget_layout(6, 8),
+                    show_input=True,
+                ),
+            ],
         ),
         menu=Menu(
             title='Filters',

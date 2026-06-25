@@ -22,4 +22,24 @@ def test_last_updated_filter_uses_datetime_widget():
     assert last_updated_filter.type == 'histogram'
     assert last_updated_filter.title == 'Last Updated'
     assert last_updated_filter.x.search_quantity == f'data.last_updated#{schema}'
-    assert last_updated_filter.show_statistics is False
+    assert last_updated_filter.show_statistics is True
+
+
+def test_staff_app_has_default_dashboard_widgets():
+    from mpi_cbs_scientific_staff_database.apps import app_entry_point, schema
+
+    widgets = app_entry_point.app.dashboard.widgets
+
+    assert [widget.title for widget in widgets] == [
+        'Display Name / Email',
+        'Position / Role',
+        'Department / Independent Group',
+        'Main Expertise Type',
+    ]
+    assert [widget.search_quantity for widget in widgets] == [
+        'results.eln.names',
+        f'data.position_role#{schema}',
+        f'data.department_or_independent_group#{schema}',
+        f'data.main_expertise_type#{schema}',
+    ]
+    assert all(widget.type == 'terms' for widget in widgets)
