@@ -24,19 +24,15 @@ schema = (
 
 
 def widget_layout(index: int) -> dict[str, Layout]:
-    md_x = 4 * (index % 4)
-    md_y = 3 * (index // 4)
-    xl_x = 8 * (index % 3)
-    xl_y = 3 * (index // 3)
-    xxl_x = 10 * (index % 3)
-    xxl_y = 3 * (index // 3)
+    row = index // 2
+    column = index % 2
 
     return {
-        'sm': Layout(h=3, w=12, x=0, y=3 * index, minH=3, minW=4),
-        'md': Layout(h=3, w=4, x=md_x, y=md_y, minH=3, minW=4),
-        'lg': Layout(h=3, w=4, x=md_x, y=md_y, minH=3, minW=4),
-        'xl': Layout(h=3, w=8, x=xl_x, y=xl_y, minH=3, minW=4),
-        'xxl': Layout(h=3, w=10, x=xxl_x, y=xxl_y, minH=3, minW=4),
+        'sm': Layout(h=3, w=6, x=6 * column, y=3 * row, minH=3, minW=4),
+        'md': Layout(h=3, w=9, x=9 * column, y=3 * row, minH=3, minW=4),
+        'lg': Layout(h=3, w=12, x=12 * column, y=3 * row, minH=3, minW=4),
+        'xl': Layout(h=3, w=15, x=15 * column, y=3 * row, minH=3, minW=4),
+        'xxl': Layout(h=3, w=18, x=18 * column, y=3 * row, minH=3, minW=4),
     }
 
 
