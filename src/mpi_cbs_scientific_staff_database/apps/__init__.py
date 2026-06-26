@@ -23,14 +23,15 @@ schema = (
 )
 
 
-def widget_layout(x: int, y: int) -> dict[str, Layout]:
-    layout = Layout(h=3, w=2, x=x, y=y, minH=3, minW=2)
+def widget_layout(index: int) -> dict[str, Layout]:
+    sm_x = 0 if index % 2 == 0 else 6
+    sm_y = 3 * (index // 2)
     return {
-        'sm': Layout(h=3, w=6, x=0, y=y, minH=3, minW=2),
-        'md': layout,
-        'lg': layout,
-        'xl': layout,
-        'xxl': layout,
+        'sm': Layout(h=3, w=6, x=sm_x, y=sm_y, minH=3, minW=2),
+        'md': Layout(h=3, w=2, x=2 * index, y=0, minH=3, minW=2),
+        'lg': Layout(h=3, w=2, x=2 * index, y=0, minH=3, minW=2),
+        'xl': Layout(h=3, w=4, x=4 * index, y=0, minH=3, minW=2),
+        'xxl': Layout(h=3, w=5, x=5 * index, y=0, minH=3, minW=2),
     }
 
 
@@ -77,13 +78,13 @@ app_entry_point = AppEntryPoint(
                 WidgetTerms(
                     title='Display Name',
                     search_quantity=f'data.display_name#{schema}',
-                    layout=widget_layout(0, 0),
+                    layout=widget_layout(0),
                     show_input=True,
                 ),
                 WidgetTerms(
                     title='Position / Role',
                     search_quantity=f'data.position_role#{schema}',
-                    layout=widget_layout(2, 0),
+                    layout=widget_layout(1),
                     show_input=True,
                 ),
                 WidgetTerms(
@@ -91,13 +92,13 @@ app_entry_point = AppEntryPoint(
                     search_quantity=(
                         f'data.department_or_independent_group#{schema}'
                     ),
-                    layout=widget_layout(4, 0),
+                    layout=widget_layout(2),
                     show_input=True,
                 ),
                 WidgetTerms(
                     title='Main Expertise Type',
                     search_quantity=f'data.main_expertise_type#{schema}',
-                    layout=widget_layout(6, 0),
+                    layout=widget_layout(3),
                     show_input=True,
                 ),
             ],
