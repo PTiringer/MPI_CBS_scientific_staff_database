@@ -43,3 +43,4 @@ def test_staff_app_has_default_dashboard_widgets():
         f'data.main_expertise_type#{schema}',
     ]
     assert all(widget.type == 'terms' for widget in widgets)
+    assert all(widget.input_mode == 'contains' for widget in widgets)
