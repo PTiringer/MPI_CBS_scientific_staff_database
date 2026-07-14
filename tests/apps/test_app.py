@@ -26,7 +26,11 @@ def test_last_updated_filter_uses_datetime_widget():
 
 
 def test_staff_app_has_default_dashboard_widgets():
-    from mpi_cbs_scientific_staff_database.apps import app_entry_point, schema
+    from mpi_cbs_scientific_staff_database.apps import (
+        DEFAULT_WIDGET_HEIGHT,
+        app_entry_point,
+        schema,
+    )
 
     widgets = app_entry_point.app.dashboard.widgets
 
@@ -44,3 +48,5 @@ def test_staff_app_has_default_dashboard_widgets():
     ]
     assert all(widget.type == 'terms' for widget in widgets)
     assert all(widget.input_mode == 'contains' for widget in widgets)
+    assert all(widget.layout['lg'].h == DEFAULT_WIDGET_HEIGHT for widget in widgets)
+    assert all(widget.layout['lg'].minH == DEFAULT_WIDGET_HEIGHT for widget in widgets)

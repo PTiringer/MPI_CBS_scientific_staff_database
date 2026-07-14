@@ -22,17 +22,29 @@ schema = (
     'ScientificStaffProfile'
 )
 
+DEFAULT_WIDGET_HEIGHT = 5
+
 
 def widget_layout(index: int) -> dict[str, Layout]:
     row = index // 2
     column = index % 2
 
+    def layout(width: int) -> Layout:
+        return Layout(
+            h=DEFAULT_WIDGET_HEIGHT,
+            w=width,
+            x=width * column,
+            y=DEFAULT_WIDGET_HEIGHT * row,
+            minH=DEFAULT_WIDGET_HEIGHT,
+            minW=4,
+        )
+
     return {
-        'sm': Layout(h=3, w=6, x=6 * column, y=3 * row, minH=3, minW=4),
-        'md': Layout(h=3, w=9, x=9 * column, y=3 * row, minH=3, minW=4),
-        'lg': Layout(h=3, w=12, x=12 * column, y=3 * row, minH=3, minW=4),
-        'xl': Layout(h=3, w=15, x=15 * column, y=3 * row, minH=3, minW=4),
-        'xxl': Layout(h=3, w=18, x=18 * column, y=3 * row, minH=3, minW=4),
+        'sm': layout(6),
+        'md': layout(9),
+        'lg': layout(12),
+        'xl': layout(15),
+        'xxl': layout(18),
     }
 
 
