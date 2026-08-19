@@ -50,3 +50,29 @@ def test_staff_app_has_default_dashboard_widgets():
     assert all(widget.input_mode == 'contains' for widget in widgets)
     assert all(widget.layout['lg'].h == DEFAULT_WIDGET_HEIGHT for widget in widgets)
     assert all(widget.layout['lg'].minH == DEFAULT_WIDGET_HEIGHT for widget in widgets)
+
+    # Small screens use a 2-by-2 layout that fills all 12 grid columns.
+    small_layout = [
+        (widget.layout['sm'].x, widget.layout['sm'].y, widget.layout['sm'].w)
+        for widget in widgets
+    ]
+    assert small_layout == [
+        (0, 0, 6),
+        (6, 0, 6),
+        (0, DEFAULT_WIDGET_HEIGHT, 6),
+        (6, DEFAULT_WIDGET_HEIGHT, 6),
+    ]
+
+    # Medium and larger screens keep all widgets in one full-width row.
+    expected_layouts = {
+        'md': [(0, 5), (5, 4), (9, 4), (13, 5)],
+        'lg': [(0, 6), (6, 6), (12, 6), (18, 6)],
+        'xl': [(0, 8), (8, 7), (15, 7), (22, 8)],
+        'xxl': [(0, 9), (9, 9), (18, 9), (27, 9)],
+    }
+    for breakpoint, expected in expected_layouts.items():
+        assert [
+            (widget.layout[breakpoint].x, widget.layout[breakpoint].w)
+            for widget in widgets
+        ] == expected
+        assert all(widget.layout[breakpoint].y == 0 for widget in widgets)

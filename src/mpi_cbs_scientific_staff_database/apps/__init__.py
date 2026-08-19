@@ -26,25 +26,27 @@ DEFAULT_WIDGET_HEIGHT = 5
 
 
 def widget_layout(index: int) -> dict[str, Layout]:
-    row = index // 2
-    column = index % 2
-
-    def layout(width: int) -> Layout:
+    def layout(widths: tuple[int, ...], columns: int) -> Layout:
+        row = index // columns
+        column = index % columns
+        width = widths[column]
         return Layout(
             h=DEFAULT_WIDGET_HEIGHT,
             w=width,
-            x=width * column,
+            x=sum(widths[:column]),
             y=DEFAULT_WIDGET_HEIGHT * row,
             minH=DEFAULT_WIDGET_HEIGHT,
             minW=4,
         )
 
     return {
-        'sm': layout(6),
-        'md': layout(9),
-        'lg': layout(12),
-        'xl': layout(15),
-        'xxl': layout(18),
+        # Two widgets per row on small screens (12 grid columns).
+        'sm': layout((6, 6), 2),
+        # Four widgets in one full-width row on medium and larger screens.
+        'md': layout((5, 4, 4, 5), 4),
+        'lg': layout((6, 6, 6, 6), 4),
+        'xl': layout((8, 7, 7, 8), 4),
+        'xxl': layout((9, 9, 9, 9), 4),
     }
 
 
